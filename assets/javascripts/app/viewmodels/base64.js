@@ -7,7 +7,7 @@ define(['bootstrap-tabs', 'jquery-base64'], function (jq1, jq2) {
 				if ($(e.target).attr("href") == "#tab_text") {
 					// Populate text tab with base64 decoded text
 					$("#textarea_text")
-					.val($.base64.decode($("#textarea_base64").val()))
+					.val($.base64.decode($("#textarea_base64").val().replace(/\s/g,'')))
 					.focus()
 					.select();
 				}
