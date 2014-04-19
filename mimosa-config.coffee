@@ -8,6 +8,7 @@ exports.config =
     'require'
     'minify'
     'live-reload'
+    'copy'
     'lint'
     'combine'
     'requirebuild-include'
@@ -26,6 +27,9 @@ exports.config =
   requireBuildInclude:
     folder:"javascripts"
     patterns: ['app/**/*.js', 'vendor/durandal/**/*.js']
+
+  copy:              # config settings for the coffeescript compiler module
+    extensions: ["js","css","png","jpg","jpeg","gif","html","eot","svg","ttf","woff","otf","yaml","kml","ico","htc","htm","json","txt","xml","xsd","map","md","mp4","mp3"]
 
   bower:
     copy:

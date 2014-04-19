@@ -37,6 +37,7 @@ var config = {
     ],
     "port": 3000,
     "base": "",
+    "packageJSONDir": null,
     "views": {
       "compileWith": "handlebars",
       "extension": "hbs",

@@ -1,6 +1,6 @@
-﻿define(['plugins/router'], function (router) {
-    var ctor = function () {
-        this.router = router;
+﻿define([], function () {
+    var ctor = {
+        
     };
 
     //Note: This module exports a function. That means that you, the developer, can create multiple instances.
