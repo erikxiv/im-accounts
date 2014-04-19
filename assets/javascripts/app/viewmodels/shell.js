@@ -8,9 +8,7 @@
         },
         activate: function () {
             router.map([
-                { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: true },
-                { route: 'base64', title:'Base64', moduleId: 'viewmodels/base64', nav: true },
-                { route: 'xsd', title:'XML Schema', moduleId: 'viewmodels/xsd', nav: true }
+                { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: false }
             ]).buildNavigationModel();
             
             return router.activate();

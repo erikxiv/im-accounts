@@ -35,7 +35,7 @@ define(function(require) {
     system.debug(true);
     //>>excludeEnd("build");
 
-    app.title = 'JavaScript Tools';
+    app.title = 'Information Meet';
 
     app.configurePlugins({
         router:true,
