@@ -38,7 +38,7 @@ package:
 dist:
 	@echo "[x] Building and distributing application..."
 	@mimosa clean --force
-	@$(build) -om
+	@$(build) -omp
 	rm -Rf dist
 	cp -R public dist
 	cp views/index-optimize.html dist/index.html
@@ -46,7 +46,7 @@ dist:
 distribute:
 	@echo "[x] Building and distributing application..."
 	@mimosa clean --force
-	@$(build) -om
+	@$(build) -omp
 	rm -Rf dist
 	cp -R public dist
 	cp views/index-optimize.html dist/index.html

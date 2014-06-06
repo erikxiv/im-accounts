@@ -8,7 +8,7 @@ exports.startServer = function(config, callback) {
   passport.use('google_oauth2', new GoogleStrategy({
       clientID: '894804733486-88sokr24mclq90ld4emhiesk1adhnaro.apps.googleusercontent.com',
       clientSecret: 'rbGaQbepGzfkNJeOu81g09bR',
-      callbackURL: 'http://localhost:3000/auth/google_oauth2/callback'
+      callbackURL: process.env.AUTH_GOOGLE_CALLBACK || 'http://localhost:3000/auth/google_oauth2/callback'
     },
     function(accessToken, refreshToken, profile, done) {
       console.log(profile);
