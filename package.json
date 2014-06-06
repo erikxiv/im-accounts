@@ -1,17 +1,19 @@
 {
-  "name": "durandal-node-server",
-  "version": "0.0.1",
-  "homepage": "",
-  "author": "",
-  "description": "",
+  "name": "informationmeet-accounts",
+  "version": "1.0.0",
+  "homepage": "accounts.informationmeet.com",
+  "author": "Erik Larsson",
+  "description": "Oauth2 server for informationmeet.com",
   "contributors": [
     {
-      "name": "",
-      "email": ""
+      "name": "Erik Larsson",
+      "email": "erik.larsson@musiker.nu"
     }
   ],
   "private": true,
   "dependencies": {
+    "passport": "0.2.0",
+    "passport-google-oauth": "0.1.5",
     "express": "3.2.4",
     "consolidate": "0.9.1",
     "handlebars": "1.0.12"

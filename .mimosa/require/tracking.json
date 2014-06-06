@@ -33,7 +33,11 @@
       "plugins/router",
       "durandal/app"
     ],
-    "/javascripts/app/viewmodels/welcome.js": []
+    "/javascripts/app/viewmodels/welcome.js": [
+      "plugins/router",
+      "durandal/app",
+      "knockout"
+    ]
   },
   "aliases": {
     "/javascripts/app/main.js": {

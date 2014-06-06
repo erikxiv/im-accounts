@@ -7,6 +7,7 @@
             app.showMessage('Search not yet implemented...');
         },
         activate: function () {
+            //console.log("shell.js:activate " + router.activeInstruction().fragment);
             router.map([
                 { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: true }
             ]).buildNavigationModel();
