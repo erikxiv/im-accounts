@@ -35,7 +35,7 @@ exports.startServer = function(config, callback) {
     app.set('views', config.server.views.path);
     app.engine(config.server.views.extension, engines[config.server.views.compileWith]);
     app.set('view engine', config.server.views.extension);
-    app.use(express.favicon());
+    app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(express.compress());
