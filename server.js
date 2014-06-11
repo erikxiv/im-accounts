@@ -11,7 +11,7 @@ exports.startServer = function(config, callback) {
       callbackURL: process.env.AUTH_GOOGLE_CALLBACK || 'http://localhost:3000/auth/google_oauth2/callback'
     },
     function(accessToken, refreshToken, profile, done) {
-      console.log(profile);
+      console.log(JSON.stringify(profile));
       return done(null, profile, { message: 'Yeay.' });
     }
   ));
