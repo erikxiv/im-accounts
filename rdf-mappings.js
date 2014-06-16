@@ -12,6 +12,7 @@ var email = rdf.createNamedNode(rdf.resolve('pc:email'));
 var id = rdf.createNamedNode(rdf.resolve('pc:id'));
 var familyName = rdf.createNamedNode(rdf.resolve('pc:name/familyName'));
 var givenName = rdf.createNamedNode(rdf.resolve('pc:name/givenName'));
+var photo = rdf.createNamedNode(rdf.resolve('pc:photo'));
 var provider = rdf.createNamedNode(rdf.resolve('pc:provider'));
 
 // <http://accounts.informationmeet.com/users/101543879134519816313@google> <http://portablecontacts.net/ns/1.0/displayName> "Erik Larsson" .
@@ -19,8 +20,11 @@ var provider = rdf.createNamedNode(rdf.resolve('pc:provider'));
 // <http://accounts.informationmeet.com/users/101543879134519816313@google> <http://portablecontacts.net/ns/1.0/id> "101543879134519816313" .
 // <http://accounts.informationmeet.com/users/101543879134519816313@google> <http://portablecontacts.net/ns/1.0/name/familyName> "Larsson" .
 // <http://accounts.informationmeet.com/users/101543879134519816313@google> <http://portablecontacts.net/ns/1.0/name/givenName> "Erik" .
+// <http://accounts.informationmeet.com/users/101543879134519816313@google> <http://portablecontacts.net/ns/1.0/photo> "https://lh6.googleusercontent.com/-IaIwN0JN-C4/AAAAAAAAAAI/AAAAAAAAAAA/XKMLTIL2f7Y/photo.jpg" .
 // <http://accounts.informationmeet.com/users/101543879134519816313@google> <http://portablecontacts.net/ns/1.0/provider> "google" .
 
+// Transforms a portablecontacts profile (JSON) to a rdfstore graph object
+// Subject of the graph is http://accounts.informationmeet.com/users/<id>@<provider>
 var mapPassportProfileToRdfUser = function(profile) {
 	var subject = rdf.createNamedNode(rdf.resolve('imusers:'+profile.id+'@'+profile.provider));
 	var graph = rdf.createGraph();
@@ -29,6 +33,7 @@ var mapPassportProfileToRdfUser = function(profile) {
 	graph.add(rdf.createTriple(subject, id, rdf.createLiteral(profile.id)));
 	graph.add(rdf.createTriple(subject, familyName, rdf.createLiteral(profile.name.familyName)));
 	graph.add(rdf.createTriple(subject, givenName, rdf.createLiteral(profile.name.givenName)));
+	graph.add(rdf.createTriple(subject, photo, rdf.createLiteral(profile._json.picture)));
 	graph.add(rdf.createTriple(subject, provider, rdf.createLiteral(profile.provider)));
 	return graph;
 }

@@ -1,37 +1,18 @@
-var express = require('express'),
-    routes = require('./routes'),
-    engines = require('consolidate'),
-    passport = require('passport'),
-    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var express = require('express');
+var engines = require('consolidate');
+var passport = require('passport');
+
+var routes = require('./routes');
+var restinterface = require('./restinterface');
+var auth = require('./auth');
+var conf = require('./config');
 
 exports.startServer = function(config, callback) {
-  passport.use('google_oauth2', new GoogleStrategy({
-      clientID: process.env.AUTH_GOOGLE_CLIENT_ID || '894804733486-88sokr24mclq90ld4emhiesk1adhnaro.apps.googleusercontent.com',
-      clientSecret: process.env.AUTH_GOOGLE_CLIENT_SECRET || 'rbGaQbepGzfkNJeOu81g09bR',
-      callbackURL: process.env.AUTH_GOOGLE_CALLBACK || 'http://localhost:3000/auth/google_oauth2/callback'
-    },
-    function(accessToken, refreshToken, profile, done) {
-      console.log(JSON.stringify(profile));
-      return done(null, profile, { message: 'Yeay.' });
-    }
-  ));
-
-  passport.serializeUser(function(user, done) {
-    done(null, user);
-  });
-
-  passport.deserializeUser(function(user, done) {
-    done(null, user);
-  });
-
-  var port = process.env.PORT || config.server.port;
+  var config = conf.initialize(config);
   var app = express();
-  var server = app.listen(port, function() {
-    console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
-  });
 
   app.configure(function() {
-    app.set('port', port);
+    app.set('port', config.server.port);
     app.set('views', config.server.views.path);
     app.engine(config.server.views.extension, engines[config.server.views.compileWith]);
     app.set('view engine', config.server.views.extension);
@@ -55,18 +36,12 @@ exports.startServer = function(config, callback) {
   app.get('/rest/user', routes.user(config));
   app.get('/rest/user/logout', routes.logout(config));
 
-  // Redirect the user to the OAuth 2.0 provider for authentication.  When
-  // complete, the provider will redirect the user back to the application at
-  //     /auth/provider/callback
-  app.get('/auth/google_oauth2', passport.authenticate('google_oauth2', { scope: ['email', 'profile'] }));
+  auth.initialize(config, app);
+  restinterface.initialize(config, app);
 
-  // The OAuth 2.0 provider has redirected the user back to the application.
-  // Finish the authentication process by attempting to obtain an access
-  // token.  If authorization was granted, the user will be logged in.
-  // Otherwise, authentication has failed.
-  app.get('/auth/google_oauth2/callback', 
-    passport.authenticate('google_oauth2', { successRedirect: '/',
-                                        failureRedirect: '/login' }));
+  var server = app.listen(config.server.port, function() {
+    console.log('im-accounts listening at %s', app.url);
+  });
 
   callback(server);
 };

@@ -7,6 +7,7 @@ var GOOGLE_PROFILE_N3 = '<http://accounts.informationmeet.com/users/101543879134
 <http://accounts.informationmeet.com/users/101543879134519816313@google> <http://portablecontacts.net/ns/1.0/id> "101543879134519816313" . \n\
 <http://accounts.informationmeet.com/users/101543879134519816313@google> <http://portablecontacts.net/ns/1.0/name/familyName> "Larsson" . \n\
 <http://accounts.informationmeet.com/users/101543879134519816313@google> <http://portablecontacts.net/ns/1.0/name/givenName> "Erik" . \n\
+<http://accounts.informationmeet.com/users/101543879134519816313@google> <http://portablecontacts.net/ns/1.0/photo> "https://lh6.googleusercontent.com/-IaIwN0JN-C4/AAAAAAAAAAI/AAAAAAAAAAA/XKMLTIL2f7Y/photo.jpg" . \n\
 <http://accounts.informationmeet.com/users/101543879134519816313@google> <http://portablecontacts.net/ns/1.0/provider> "google" . \n';
 
 describe("RDF mappings", function() {

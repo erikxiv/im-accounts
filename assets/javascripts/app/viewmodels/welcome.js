@@ -36,7 +36,7 @@
         },
         login: function() {
             console.log(router);
-            window.location.replace("/auth/google_oauth2");
+            window.location.replace("/auth/google");
         },
         logout: function() {
             $.ajax({
