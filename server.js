@@ -33,14 +33,15 @@ exports.startServer = function(config, callback) {
   });
 
   app.get('/', routes.index(config));
-  app.get('/rest/user', routes.user(config));
+  app.get('/iframe', routes.iframe(config));
+  app.get('/rest/user', auth.authenticate, routes.user(config));
   app.get('/rest/user/logout', routes.logout(config));
 
   auth.initialize(config, app);
   restinterface.initialize(config, app);
 
   var server = app.listen(config.server.port, function() {
-    console.log('im-accounts listening at %s', app.url);
+    console.log('im-accounts listening at %s', config.server.port);
   });
 
   callback(server);

@@ -10,6 +10,7 @@
 	var clientID = process.env.AUTH_GOOGLE_CLIENT_ID || '894804733486-88sokr24mclq90ld4emhiesk1adhnaro.apps.googleusercontent.com';
 	var clientSecret = process.env.AUTH_GOOGLE_CLIENT_SECRET || 'rbGaQbepGzfkNJeOu81g09bR';
 	var callbackURL = process.env.AUTH_GOOGLE_CALLBACK || 'http://localhost:3000/auth/google/callback';
+	var jwtSecret = 'XmhNBrYDZUz6wqJ';
 
 	//---------------
 	// Module exports
@@ -19,6 +20,7 @@
 			server: config.server,
 			watch: config.watch,
 			liveReload: config.liveReload,
+			jwtSecret: jwtSecret,
 			auth: {
 				google: {
 					clientId: clientID,

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/javascripts/vendor/jquery/jquery.js"></script>
+    <script type="text/javascript">
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        // If access token (query parameter code) exists
+        // Get session token and profile from im-accounts
+        var accessToken = getParameterByName('code');
+        if (accessToken) {
+          // console.log('iframe trying to get session token: ' + getParameterByName('code'));
+          $.ajax({
+              type: "GET",
+              url: "/auth/token?code="+accessToken,
+              dataType: "json"
+          })
+          .done(function( msg ) {
+              // Returns msg.sessionToken and msg.profile
+              // console.log("iframe token OK: " + msg.profile.displayName);
+              localStorage.setItem("sessionToken", msg.sessionToken);
+              msg.type = 'loginSucceeded';
+              parent.postMessage(JSON.stringify(msg), "*");
+          }.bind(this))
+          .error(function(jqXHR, textStatus, errorThrown) {
+              // console.log("iframe token error: " + errorThrown);
+              parent.postMessage(JSON.stringify({type: "loginFailed", message: textStatus}), "*");
+          }.bind(this));
+        }
+        else {
+          var sessionToken = localStorage.getItem("sessionToken");
+          if (sessionToken) {
+            // console.log("iframe sessionToken found!");
+
+            // console.log("iframe trying to get profile");
+            $.ajax({
+                type: "GET",
+                url: "/rest/user?st="+sessionToken,
+                dataType: "json"
+            })
+            .done(function( profile ) {
+                // console.log("iframe profile received: " + profile.displayName);
+                var msg = {
+                  type: 'alreadyLoggedIn',
+                  sessionToken: sessionToken,
+                  profile: profile
+                }
+                parent.postMessage(JSON.stringify(msg), "*");
+            }.bind(this))
+            .error(function(jqXHR, textStatus, errorThrown) {
+                // console.log("iframe failed to get profile using sessionToken");
+                var msg = {
+                  type: 'notLoggedIn',
+                  message: textStatus
+                }
+                parent.postMessage(JSON.stringify(msg), "*");
+            }.bind(this));
+          }
+        }
+    </script>
+  </head>
+  <body>
+    This should never be seen.
+  </body>
+</html>

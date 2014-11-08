@@ -29,14 +29,19 @@
       "durandal/viewLocator",
       "durandal/system"
     ],
+    "/javascripts/app/user.js": [
+      "knockout"
+    ],
     "/javascripts/app/viewmodels/shell.js": [
       "plugins/router",
-      "durandal/app"
+      "durandal/app",
+      "user"
     ],
     "/javascripts/app/viewmodels/welcome.js": [
       "plugins/router",
       "durandal/app",
-      "knockout"
+      "knockout",
+      "user"
     ]
   },
   "aliases": {
@@ -89,7 +94,8 @@
       "bootstrap-tabs": "../vendor/bootstrap/bootstrap-tabs",
       "durandal": "../vendor/durandal",
       "plugins": "../vendor/durandal/plugins",
-      "transitions": "../vendor/durandal/transitions"
+      "transitions": "../vendor/durandal/transitions",
+      "user": "user"
     }
   },
   "requireFiles": [

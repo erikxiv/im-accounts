@@ -1,23 +1,23 @@
 ﻿<div class="jumbotron">
-	<!-- ko if: userLoggedIn -->
+	<!-- ko if: user.loggedIn -->
 	<p>
 	<h1>You are logged in</h1>
 		<table class="table">
 			<tbody>
 				<tr>
 					<th>DisplayName</th>
-					<td data-bind="text: userDisplayName"></td>
+					<td data-bind="text: user.displayName"></td>
 				</tr>
 				<tr>
 					<th>Email</th>
-					<td data-bind="text: userEmail"></td>
+					<td data-bind="text: user.email"></td>
 				</tr>
 			</tbody>
 		</table>
 		<button class="btn btn-danger btn-lg" data-bind="click: logout">Log out</button>
 	</p>
 	<!-- /ko -->
-	<!-- ko ifnot: userLoggedIn -->
+	<!-- ko ifnot: user.loggedIn -->
 	<p>
 		<h1>You are not logged in</h1>
 		<button class="btn btn-danger btn-lg" data-bind="click: login">Log in with Google</button>
